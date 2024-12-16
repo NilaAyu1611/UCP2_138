@@ -16,5 +16,6 @@ interface DosenDao {
         dosen: Dosen
     )
 
-
+    @Query("select * from dosen where nama= :nama")
+    fun getDosen(nama:String): Flow<Dosen>
 }
