@@ -11,5 +11,10 @@ import kotlinx.coroutines.flow.Flow
 interface DosenDao {
     @Query("select* from dosen")
     fun getAllDosen(): Flow<List<Dosen>>
+    @Insert
+    suspend fun insertDosen(
+        dosen: Dosen
+    )
+
 
 }
