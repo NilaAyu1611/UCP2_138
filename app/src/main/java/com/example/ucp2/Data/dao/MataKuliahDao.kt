@@ -1,6 +1,7 @@
 package com.example.ucp2.Data.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.example.ucp2.Data.entity.Matakuliah
 import kotlinx.coroutines.flow.Flow
@@ -9,6 +10,11 @@ import kotlinx.coroutines.flow.Flow
 interface MataKuliahDao {
     @Query("select* from matakuliah")
     fun getAllMatakuliah(): Flow<List<Matakuliah>>
+
+    @Insert
+    suspend fun insertMatakuliah(
+        matakuliah: Matakuliah
+    )
 
 
 }
