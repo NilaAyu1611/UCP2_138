@@ -68,6 +68,13 @@ data class DosenUIState(
     val snackBarMessage: String? = null,
 )
 
+//untuk informasi errornya/ menyimpan informasi tentang status kesalahan (error) atau validasi form input.
+data class FormErrorState(
+    val nidn: String? = null,
+    val nama: String? = null,
+    val jeniskelamin: String? = null
+)
+
 
 //menyimpan input form kedalam entity
 fun DosenEvent.toDosenEntity():Dosen = Dosen(
