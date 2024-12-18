@@ -1,7 +1,9 @@
 package com.example.ucp2.view.viewmodel
 
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.app.NotificationCompat.MessagingStyle.Message
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,10 +23,10 @@ class DosenViewModel (private val repositoryDsn: RepositoryDsn): ViewModel(){
 
     private fun validateFields(): Boolean{
         val event = uiState.dosenEvent
-        val errorState = FormErrorSate(
-            nidn = if (event.nidn.isNotEmpety()) null else "NIDN tidak boleh kosong",
-            nama = if (event.nama.isNotEmpety()) null else "Nama tidak boleh kosong",
-            jeniskelamin = if (event.jeniskelamin.isNotEmpety()) null else "Jenis Kelamin tidak boleh kosong"
+        val errorState = FormErrorState(
+            nidn = if (event.nidn.isNotEmpty()) null else "NIDN tidak boleh kosong",
+            nama = if (event.nama.isNotEmpty()) null else "Nama tidak boleh kosong",
+            jeniskelamin = if (event.jeniskelamin.isNotEmpty()) null else "Jenis Kelamin tidak boleh kosong"
         )
         uiState = uiState.copy(isEntryValid = errorState)
         return errorState.isValid()
@@ -35,7 +37,7 @@ class DosenViewModel (private val repositoryDsn: RepositoryDsn): ViewModel(){
         if (validateFields()){
             viewModelScope.launch {
                 try {
-                    repositoryDsn.insertDosen((currentEvent.toDoseenEntity()))
+                    repositoryDsn.insertDosen((currentEvent.toDosenEntity()))
                     uiState = uiState.copy(
                         snackBarMessage = "Data berhasil disimpan",
                         dosenEvent = DosenEvent(),
@@ -64,7 +66,7 @@ class DosenViewModel (private val repositoryDsn: RepositoryDsn): ViewModel(){
 // untuk merubah state
 data class DosenUIState(
     val dosenEvent: DosenEvent = DosenEvent(),
-    val isEntryValid: FormErrorState = FormErrorSate(),
+    val isEntryValid: FormErrorState = FormErrorState(),
     val snackBarMessage: String? = null,
 )
 
