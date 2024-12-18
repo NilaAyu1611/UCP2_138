@@ -14,4 +14,8 @@ class LocalRepositoryMK(
     override fun getAllMatakuliah(): Flow<List<Matakuliah>> {       // memanggil fungsi ini untuk mendapatkan semua data mk dlm bentuk flow
         return mataKuliahDao.getAllMatakuliah()
     }
+
+    override fun getMatakuliah(kode: String): Flow<Matakuliah> {       //fungsi untuk mengambil data mk berdasarkan kode
+        return mataKuliahDao.getMatakuliah(kode)
+    }
 }
