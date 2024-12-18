@@ -3,6 +3,7 @@ package com.example.ucp2.Data.database
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.ucp2.Data.dao.DosenDao
 import com.example.ucp2.Data.dao.MataKuliahDao
 import com.example.ucp2.Data.entity.Dosen
@@ -12,7 +13,7 @@ import com.example.ucp2.Data.entity.Matakuliah
 @Database(entities = [Dosen::class, Matakuliah::class],       //Daftar tabel dalam DB
     version = 1,
     exportSchema = false)
-abstract class krsDatabase(){
+abstract class krsDatabase():RoomDatabase(){
 
     abstract fun dosenDao(): DosenDao       // Dao untuk mengakses data di tabel dosen
 
