@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface RepositoryMK {
     suspend fun insertMatakuliah(matakuliah: Matakuliah)
-
+    fun getAllMatakuliah(): Flow<List<Matakuliah>>          //mendapatkan semua data dosen dlm bentuk aliran flow
 
 }
