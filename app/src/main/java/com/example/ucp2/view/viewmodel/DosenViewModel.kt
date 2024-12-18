@@ -75,7 +75,11 @@ data class FormErrorState(
     val nidn: String? = null,
     val nama: String? = null,
     val jeniskelamin: String? = null
-)
+){
+    fun isValid():Boolean{                                          // untuk validasi biar ndak kosong
+        return nidn == null && nama == null && jeniskelamin == null
+    }
+}
 
 
 //menyimpan input form kedalam entity
