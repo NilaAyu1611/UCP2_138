@@ -11,3 +11,9 @@ class DosenViewModel (private val repositoryDsn: RepositoryDsn): ViewModel(){
 }
 
 
+// data class variabel yang menyimpan data input form
+data class DosenEvent(
+    val nidn: String = "",
+    val nama: String = "",
+    val jeniskelamin: String = "",
+)
