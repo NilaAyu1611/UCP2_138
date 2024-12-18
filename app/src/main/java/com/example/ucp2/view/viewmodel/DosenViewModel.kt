@@ -1,12 +1,17 @@
 package com.example.ucp2.view.viewmodel
 
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.NotificationCompat.MessagingStyle.Message
 import androidx.lifecycle.ViewModel
 import com.example.ucp2.Data.entity.Dosen
 import com.example.ucp2.repository.RepositoryDsn
 
 class DosenViewModel (private val repositoryDsn: RepositoryDsn): ViewModel(){
+
+    var uiState by mutableStateOf(DosenUIState())
+
+
 
 
 
