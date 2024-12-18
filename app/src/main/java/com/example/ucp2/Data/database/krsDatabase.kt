@@ -14,7 +14,7 @@ abstract class krsDatabase(){
 
     abstract fun dosenDao(): DosenDao       // Dao untuk mengakses data di tabel dosen
 
-
+    abstract fun mataKuliahDao(): MataKuliahDao     // Dao untuk mengakses data di tabel matakuliah
 
 
 }
