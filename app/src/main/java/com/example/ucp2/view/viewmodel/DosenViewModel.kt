@@ -11,7 +11,11 @@ class DosenViewModel (private val repositoryDsn: RepositoryDsn): ViewModel(){
 
     var uiState by mutableStateOf(DosenUIState())
 
-
+    fun  updateState(dosenEvent: DosenEvent){
+        uiState = uiState.copy(
+            dosenEvent = dosenEvent,
+        )
+    }
 
 
 
