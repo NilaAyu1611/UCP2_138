@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface RepositoryDsn {
     suspend fun insertDosen(dosen: Dosen)
     fun getAllDosen(): Flow<List<Dosen>>        //mendapatkan semua data dosen dlm bentuk aliran flow
-
+    fun getDosen(nama: String): Flow<Dosen>     //mengambil data dosen berdasarkan nama
 }
