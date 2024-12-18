@@ -18,4 +18,8 @@ class LocalRepositoryMK(
     override fun getMatakuliah(kode: String): Flow<Matakuliah> {       //fungsi untuk mengambil data mk berdasarkan kode
         return mataKuliahDao.getMatakuliah(kode)
     }
+
+    override suspend fun deleteMatakuliah(matakuliah: Matakuliah) {     // mengahpus data mk
+        mataKuliahDao.deleteMatakuliah(matakuliah)
+    }
 }
