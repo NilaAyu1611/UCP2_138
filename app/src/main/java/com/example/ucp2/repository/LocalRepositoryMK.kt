@@ -22,4 +22,8 @@ class LocalRepositoryMK(
     override suspend fun deleteMatakuliah(matakuliah: Matakuliah) {     // mengahpus data mk
         mataKuliahDao.deleteMatakuliah(matakuliah)
     }
+
+    override suspend fun updateMatakuliah(matakuliah: Matakuliah) {     // memperbarui data mk di DB
+        mataKuliahDao.updateMatakuliah(matakuliah)
+    }
 }
