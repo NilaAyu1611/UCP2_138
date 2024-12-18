@@ -16,5 +16,8 @@ interface MataKuliahDao {
         matakuliah: Matakuliah
     )
 
+    @Query("select* from matakuliah where kode= :kode")
+    fun getMatakuliah(kode: String): Flow<Matakuliah>
+
 
 }
