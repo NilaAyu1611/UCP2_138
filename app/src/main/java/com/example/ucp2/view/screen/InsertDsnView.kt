@@ -12,3 +12,12 @@ object DestinasiInsert : AlamatNavigasi{
     override val route: String = "insert_dsn"
 }
 
+@Composable
+fun InsertDsnView(
+    onBack: () -> Unit,
+    onNavigate: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: DosenViewModel = viewModel(factory = PenyedeiaViewModel.Factory)
+){
+
+}
