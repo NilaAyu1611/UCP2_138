@@ -41,7 +41,11 @@ object PenyediaViewModel {
             )
         }
 
-
+        initializer {
+            HomeMKViewModel(
+                krsApp().containerApp.repositoryMK
+            )
+        }
 
 
 
