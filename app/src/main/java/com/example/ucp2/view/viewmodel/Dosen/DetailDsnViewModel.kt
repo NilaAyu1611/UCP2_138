@@ -1,4 +1,4 @@
-package com.example.ucp2.view.viewmodel
+package com.example.ucp2.view.viewmodel.Dosen
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -64,7 +64,7 @@ class DetailUiState(
 }
 
 // memindahkan data class dari entity ke ui
-fun Dosen.toDetailUiEvent(): DosenEvent{
+fun Dosen.toDetailUiEvent(): DosenEvent {
     return DosenEvent(
         nidn = nidn,
         nama = nama,

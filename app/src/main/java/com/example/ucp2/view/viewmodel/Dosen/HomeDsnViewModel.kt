@@ -1,7 +1,4 @@
-package com.example.ucp2.view.viewmodel
-
-import android.os.Parcel
-import android.os.Parcelable
+package com.example.ucp2.view.viewmodel.Dosen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

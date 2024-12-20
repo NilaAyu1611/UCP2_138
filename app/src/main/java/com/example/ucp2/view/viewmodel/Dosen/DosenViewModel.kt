@@ -1,10 +1,9 @@
-package com.example.ucp2.view.viewmodel
+package com.example.ucp2.view.viewmodel.Dosen
 
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.app.NotificationCompat.MessagingStyle.Message
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2.Data.entity.Dosen

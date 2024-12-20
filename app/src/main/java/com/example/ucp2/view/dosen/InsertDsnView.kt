@@ -1,4 +1,4 @@
-package com.example.ucp2.view.screen
+package com.example.ucp2.view.dosen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,14 +26,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2.ui.navigation.AlamatNavigasi
-import com.example.ucp2.view.viewmodel.DosenEvent
-import com.example.ucp2.view.viewmodel.DosenUIState
-import com.example.ucp2.view.viewmodel.DosenViewModel
-import com.example.ucp2.view.viewmodel.FormErrorState
-import kotlinx.coroutines.coroutineScope
+import com.example.ucp2.view.viewmodel.Dosen.DosenEvent
+import com.example.ucp2.view.viewmodel.Dosen.DosenUIState
+import com.example.ucp2.view.viewmodel.Dosen.DosenViewModel
+import com.example.ucp2.view.viewmodel.Dosen.FormErrorState
+import com.example.ucp2.view.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 object DestinasiInsert : AlamatNavigasi{
     override val route: String = "insert_dsn"
 }
@@ -43,7 +43,7 @@ fun InsertDsnView(
     onBack: () -> Unit,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: DosenViewModel = viewModel(factory = PenyedeiaViewModel.Factory)
+    viewModel: DosenViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val uiState = viewModel.uiState         //mengambil ui state dari VM
     val snackbarHostState = remember {SnackbarHostState()}      // Snacbar state/menampilkan pesan kpd user terkait ui
