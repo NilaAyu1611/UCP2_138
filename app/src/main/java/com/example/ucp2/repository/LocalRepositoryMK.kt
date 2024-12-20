@@ -1,11 +1,15 @@
 package com.example.ucp2.repository
 
+import com.example.ucp2.Data.dao.DosenDao
 import com.example.ucp2.Data.dao.MataKuliahDao
 import com.example.ucp2.Data.entity.Matakuliah
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class LocalRepositoryMK(
-    private val mataKuliahDao: MataKuliahDao
+    private val mataKuliahDao: MataKuliahDao,
+    private val dosenDao: DosenDao
 ): RepositoryMK {
     override suspend fun insertMatakuliah(matakuliah: Matakuliah) {
         mataKuliahDao.insertMatakuliah(matakuliah)
@@ -26,4 +30,12 @@ class LocalRepositoryMK(
     override suspend fun updateMatakuliah(matakuliah: Matakuliah) {     // memperbarui data mk di DB
         mataKuliahDao.updateMatakuliah(matakuliah)
     }
+
+    override suspend fun getDosenList(): Flow<List<String>> {
+        return flow {
+            emit(dosenDao.getAllDosenNames())
+        }
+    }
+
+
 }
