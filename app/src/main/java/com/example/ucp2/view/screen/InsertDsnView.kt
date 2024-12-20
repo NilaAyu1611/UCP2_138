@@ -2,10 +2,14 @@ package com.example.ucp2.view.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -158,6 +162,30 @@ fun FormDosen(
             text = errorState.nama ?: "",
             color = Color.Red
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = "Jenis Kelamin")
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            jeniskelamin.forEach { jk ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    RadioButton(
+                        selected = dosenEvent.jeniskelamin == jk,
+                        onClick = {
+                            onValueChange(dosenEvent.copy(jeniskelamin = jk))
+                        },
+                    )
+                    Text(
+                        text = jk,
+                    )
+                }
+            }
+
+        }
 
 
 
