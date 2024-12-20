@@ -9,6 +9,7 @@ import com.example.ucp2.KrsApp
 import com.example.ucp2.view.viewmodel.Dosen.DetailDsnViewModel
 import com.example.ucp2.view.viewmodel.Dosen.DosenViewModel
 import com.example.ucp2.view.viewmodel.Dosen.HomeDsnViewModel
+import com.example.ucp2.view.viewmodel.Matakuliah.DetailMKViewModel
 import com.example.ucp2.view.viewmodel.Matakuliah.HomeMKViewModel
 import com.example.ucp2.view.viewmodel.Matakuliah.MKViewModel
 
@@ -43,6 +44,13 @@ object PenyediaViewModel {
 
         initializer {
             HomeMKViewModel(
+                krsApp().containerApp.repositoryMK
+            )
+        }
+
+        initializer {
+            DetailMKViewModel(
+                createSavedStateHandle(),
                 krsApp().containerApp.repositoryMK
             )
         }
