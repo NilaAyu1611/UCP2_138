@@ -11,20 +11,20 @@ object PenyediaViewModel {
     val Factory = viewModelFactory {
         initializer {
             DosenViewModel(
-                krsApp().containerApp.repositoryMhs
+                krsApp().containerApp.repositoryDsn
             )
         }
 
         initializer {
             HomeDsnViewModel(
-                krsApp().containerApp.repositoryMhs
+                krsApp().containerApp.repositoryDsn
             )
         }
 
         initializer {
             DetailDsnViewModel(
                 createSavedStateHandle(),
-                krsApp().containerApp.repositoryMhs,
+                krsApp().containerApp.repositoryDsn,
             )
         }
 
