@@ -77,7 +77,7 @@ fun InsertMkView(
             InsertBodyMk(
                 uiState = uiState,
                 onValueChange = { updatedEvent ->
-                    viewModel.updateState(updatedEvent)
+                    viewModel.update(updatedEvent)
                 },
                 onClick = {
                     viewModel.saveData()
