@@ -18,7 +18,10 @@ class ContainerApp (private val context: Context): InterfaceContainerApp{
     }
 
     override val repositoryMK: RepositoryMK by lazy {
-        LocalRepositoryMK(krsDatabase.getDatabase(context).mataKuliahDao())
+        LocalRepositoryMK(
+            krsDatabase.getDatabase(context).mataKuliahDao(),
+            krsDatabase.getDatabase(context).dosenDao()
+        )
     }
 
 
