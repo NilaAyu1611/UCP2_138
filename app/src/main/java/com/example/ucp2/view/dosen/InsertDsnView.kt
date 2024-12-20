@@ -14,7 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2.ui.costumwidget.TopAppBar
 import com.example.ucp2.ui.navigation.AlamatNavigasi
 import com.example.ucp2.view.viewmodel.Dosen.DosenEvent
 import com.example.ucp2.view.viewmodel.Dosen.DosenUIState
@@ -82,7 +83,7 @@ fun InsertDsnView(
                 onValueChange = {updatedEvent ->
                     viewModel.updateState(updatedEvent) // update state di viewmodel
                 },
-                onClik = {
+                onClick = {
                     viewModel.saveData()        //simpan data
                     onNavigate()
                 }
