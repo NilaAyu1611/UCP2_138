@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2.Data.entity.Dosen
 import com.example.ucp2.repository.RepositoryDsn
+import com.example.ucp2.ui.navigation.DestinasiDetailDosen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +19,7 @@ class DetailDsnViewModel (
     savedStateHandle: SavedStateHandle,
     private val repositoryDsn: RepositoryDsn,
 ): ViewModel(){
-    private val _nama: String = checkNotNull(savedStateHandle[DestinasiDetail.NAMA])
+    private val _nama: String = checkNotNull(savedStateHandle[DestinasiDetailDosen.nama])
 
     val detailUiState: StateFlow<DetailUiState> = repositoryDsn.getDosen(_nama)
         .filterNotNull()
