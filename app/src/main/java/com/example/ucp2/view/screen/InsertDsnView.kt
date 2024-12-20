@@ -144,6 +144,23 @@ fun FormDosen(
             color = Color.Red
         )
 
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = dosenEvent.nama,
+            onValueChange = {
+                onValueChange(dosenEvent.copy(nama = it))
+            },
+            label = { Text("Nama") },
+            isError = errorState.nama != null,
+            placeholder = { Text("Masukkan Nama") },
+        )
+        Text(
+            text = errorState.nama ?: "",
+            color = Color.Red
+        )
+
+
+
 
 
     }
