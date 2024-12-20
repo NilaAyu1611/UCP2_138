@@ -26,3 +26,9 @@ object DestinasiHomeMK : AlamatNavigasi {
     override val route = "homeMK"
 }
 
+// Navigasi untuk Detail Matakuliah
+object DestinasiDetailMK : AlamatNavigasi {
+    override val route = "detailMK"
+    const val KODE = "kode" // KODE adalah kunci unik untuk Matakuliah
+    val routesWithArg = "$route/{$KODE}"
+}
