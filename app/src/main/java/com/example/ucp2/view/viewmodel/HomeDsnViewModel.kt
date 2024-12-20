@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.stateIn
 
 class HomeDsnViewModel (
     private val repositoryDsn: RepositoryDsn
-):ViewModel(), Parcelable {
+):ViewModel() {
     val homeUIState: StateFlow<HomeUiState> = repositoryDsn.getAllDosen()
         .filterNotNull()
         .map {
