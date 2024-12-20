@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -23,6 +24,7 @@ import com.example.ucp2.ui.navigation.AlamatNavigasi
 import com.example.ucp2.view.viewmodel.DosenEvent
 import com.example.ucp2.view.viewmodel.DosenUIState
 import com.example.ucp2.view.viewmodel.DosenViewModel
+import com.example.ucp2.view.viewmodel.FormErrorState
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
@@ -100,7 +102,7 @@ fun InsertBodyDsn(
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         FormDosen(
-            mahasiswaEvent = uiState.dosenEvent,
+            dosenEvent = uiState.dosenEvent,
             onValueChange = onValueChange,
             errorState = uiState.isEntryValid,
             modifier = Modifier.fillMaxWidth()
@@ -113,4 +115,3 @@ fun InsertBodyDsn(
         }
     }
 }
-
