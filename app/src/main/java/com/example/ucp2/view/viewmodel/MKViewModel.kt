@@ -1,10 +1,14 @@
 package com.example.ucp2.view.viewmodel
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.app.NotificationCompat.MessagingStyle.Message
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.ucp2.Data.entity.Matakuliah
 import com.example.ucp2.repository.RepositoryMK
+import kotlinx.coroutines.launch
 
 
 class MKViewModel (private val repositoryMK: RepositoryMK) : ViewModel(){
@@ -23,12 +27,42 @@ class MKViewModel (private val repositoryMK: RepositoryMK) : ViewModel(){
         val errorState = FormErrorStateMK (
             kode = if (event.kode.isNotEmpty()) null else "Kode tidak boleh kosong",
             nama = if (event.nama.isNotEmpty()) null else "Nama tidak boleh kosong",
-
-
-
+            sks = if (event.sks.isNotEmpty()) null else "SKS tidak boleh kosong",
+            semester = if (event.semester.isNotEmpty()) null else "Semester tidak boleh kosong",
+            jenismk = if (event.jenismk.isNotEmpty()) null else "Jenis Mata Kuliah tidak boleh kosong",
+            dosenpengampu = if (event.dosenpengampu.isNotEmpty()) null else " tidak boleh kosong"
         )
+        uiState = uiState.copy(isEntryValid = errorState)
+        return errorState.isValid()
     }
-    
+
+    fun saveData(){
+        val currentEvent = uiState.matakuliahEvent
+        if (validateFields()){
+            viewModelScope.launch {
+                try {
+                    repositoryMK.insertMatakuliah(currentEvent.toMatakuliahEntity())
+                    uiState = uiState.copy(
+                        snackBarMessage = "Data berhasil disimpan",
+                        matakuliahEvent = MatakuliahEvent(),
+                        isEntryValid = FormErrorStateMK()
+                    )
+                }
+                catch (e: Exception){
+                    uiState = uiState.copy(
+                        snackBarMessage = "Data gagal disimpan"
+                    )
+                }
+
+            }
+        }else{
+            uiState = uiState.copy(
+                snackBarMessage = "Input tidak valid. Periksa kembali data Anda"
+            )
+
+        }
+    }
+
 }
 
 
