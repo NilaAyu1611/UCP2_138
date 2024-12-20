@@ -13,6 +13,16 @@ import kotlinx.coroutines.launch
 class MKViewModel (private val repositoryMK: RepositoryMK) : ViewModel(){
 
     var uiState by mutableStateOf(MKUIState())
+        private set
+
+    init {
+        //mengambil daftar dosen saat VM diinisialisasi
+        viewModelScope.launch {
+            repositoryMK.getDosenList().collect { dosenNames ->
+                uiState = uiState.copy(dosenList = dosenNames)
+            }
+        }
+    }
 
     fun update(matakuliahEvent: MatakuliahEvent){
         uiState = uiState.copy(
@@ -61,6 +71,9 @@ class MKViewModel (private val repositoryMK: RepositoryMK) : ViewModel(){
 
         }
     }
+    fun resetSbackBarMessage(){
+        uiState = uiState.copy(snackBarMessage = null)
+    }
 
 }
 
@@ -71,6 +84,7 @@ data class MKUIState(
     val matakuliahEvent: MatakuliahEvent = MatakuliahEvent(),
     val isEntryValid: FormErrorStateMK = FormErrorStateMK(),
     val snackBarMessage: String? = null,
+    val dosenList: List<String> = emptyList()
 )
 
 data class FormErrorStateMK(
