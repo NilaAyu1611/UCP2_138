@@ -58,3 +58,16 @@ class DetailMKViewModel (
     }
 }
 
+
+class DetailMKlUiState(
+    val detailUiEvent: MatakuliahEvent = MatakuliahEvent(),
+    val isLoading: Boolean = false,
+    val isError: Boolean = false,
+    val errorMessage: String = ""
+){
+    val isUiEventEmpty: Boolean
+        get() = detailUiEvent == MatakuliahEvent()
+
+    val isUiEventNotEmpty: Boolean
+        get() = detailUiEvent != MatakuliahEvent()
+}
