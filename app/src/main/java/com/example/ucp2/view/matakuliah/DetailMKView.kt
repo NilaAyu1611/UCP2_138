@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -26,7 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2.Data.entity.Matakuliah
 import com.example.ucp2.ui.costumwidget.TopAppBar
+import com.example.ucp2.view.dosen.ComponentDetailDsn
 import com.example.ucp2.view.dosen.ItemDetailDsn
 import com.example.ucp2.view.viewmodel.Matakuliah.DetailMKViewModel
 import com.example.ucp2.view.viewmodel.Matakuliah.DetailMKlUiState
@@ -134,6 +138,41 @@ fun BodyDetailMK(
                     modifier = Modifier.padding(16.dp)
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun ItemDetailMK(
+    modifier: Modifier = Modifier,
+    matakuliah: Matakuliah
+) {
+    Card (
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            ComponentDetailMK(judul = "Kode", isinya = matakuliah.kode)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMK(judul = "Nama", isinya = matakuliah.nama)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMK(judul = "SKS", isinya = matakuliah.sks.toString())
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMK(judul = "Semester", isinya = matakuliah.semester)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMK(judul = "Jenis MK", isinya = matakuliah.jenismk)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMK(judul = "Dosen Pengampu", isinya = matakuliah.dosenpengampu)
         }
     }
 }
