@@ -13,3 +13,10 @@ object DestinasiHome : AlamatNavigasi{
 object DestinasiHomeDosen : AlamatNavigasi {
     override val route = "homeDosen"
 }
+
+//Navigasi untuk detail dosen
+object DestinasiDetailDosen : AlamatNavigasi{
+    override val route = "detailDosen"
+    const val nama = "nama"
+    val routeWithArg = "$route/{$nama}"
+}
