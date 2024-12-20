@@ -3,6 +3,7 @@ package com.example.ucp2.view.dosen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2.Data.entity.Dosen
 import com.example.ucp2.view.viewmodel.Dosen.HomeDsnViewModel
 import com.example.ucp2.view.viewmodel.Dosen.HomeUiState
 import com.example.ucp2.view.viewmodel.PenyediaViewModel
@@ -130,4 +132,25 @@ fun BodyHomeDsnView (
         }
     }
 
+}
+
+@Composable
+fun ListDosen(
+    listDsn: List<Dosen>,
+    modifier: Modifier = Modifier,
+    onClik: (String) -> Unit = { }
+){
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(
+            items = listDsn,
+            itemContent = {Dsn ->
+                CardDsn(
+                    Dsn = Dsn,
+                    onClik = {onClik(Dsn.nama)}
+                )
+            }
+        )
+    }
 }
