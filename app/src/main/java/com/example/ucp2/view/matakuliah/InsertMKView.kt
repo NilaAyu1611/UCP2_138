@@ -44,6 +44,23 @@ fun FormMatakuliah(
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
+            value = matakuliahEvent.kode,
+            onValueChange = {
+                onValueChange(matakuliahEvent.copy(kode = it))
+            },
+            label = { Text("Kode Mata Kuliah") },
+            isError = errorState.kode != null,
+            placeholder = { Text("Masukkan Kode Mata Kuliah") },
+        )
+        Text(
+            text = errorState.kode ?: "",
+            color = Color.Red
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = matakuliahEvent.nama,
             onValueChange = {
                 onValueChange(matakuliahEvent.copy(nama = it))
@@ -56,6 +73,41 @@ fun FormMatakuliah(
             text = errorState.nama ?: "",
             color = Color.Red
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = matakuliahEvent.sks,
+            onValueChange = {
+                onValueChange(matakuliahEvent.copy(sks = it))
+            },
+            label = { Text("SKS Mata Kuliah") },
+            isError = errorState.sks != null,
+            placeholder = { Text("Masukkan Jumlah SKS Mata Kuliah") },
+        )
+        Text(
+            text = errorState.sks ?: "",
+            color = Color.Red
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = matakuliahEvent.semester,
+            onValueChange = {
+                onValueChange(matakuliahEvent.copy(semester = it))
+            },
+            label = { Text("Semester Mata Kuliah") },
+            isError = errorState.semester != null,
+            placeholder = { Text("Masukkan Semester Mata Kuliah") },
+        )
+        Text(
+            text = errorState.semester ?: "",
+            color = Color.Red
+        )
+
 
         Spacer(modifier = Modifier.height(16.dp))
         Text(text = "Jenis Mata Kuliah")
