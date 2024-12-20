@@ -3,6 +3,7 @@ package com.example.ucp2.view.matakuliah
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2.Data.entity.Matakuliah
 import com.example.ucp2.ui.costumwidget.TopAppBar
 import com.example.ucp2.view.viewmodel.Matakuliah.HomeMKUiState
 import com.example.ucp2.view.viewmodel.Matakuliah.MKViewModel
@@ -125,5 +127,26 @@ fun BodyHomeMKView(
                 modifier = modifier
             )
         }
+    }
+}
+
+@Composable
+fun ListMataKuliah(
+    listMK: List<Matakuliah>,
+    modifier: Modifier = Modifier,
+    onClik: (String) -> Unit = {}
+) {
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(
+            items = listMK,
+            itemContent = { mk ->
+                CardMK(
+                    mk = mk,
+                    onClik = { onClik(mk.kode) }
+                )
+            }
+        )
     }
 }
