@@ -10,4 +10,7 @@ interface RepositoryMK {
     suspend fun deleteMatakuliah(matakuliah: Matakuliah)    // menghapus data mk
     suspend fun updateMatakuliah(matakuliah: Matakuliah)    // memperbarui data mk di db
 
+    suspend fun getDosenList(): Flow<List<String>>
+
+
 }
