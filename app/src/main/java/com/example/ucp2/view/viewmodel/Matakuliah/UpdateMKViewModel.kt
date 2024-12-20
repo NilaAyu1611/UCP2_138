@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.ucp2.Data.entity.Matakuliah
 
 import com.example.ucp2.repository.RepositoryMK
+import com.example.ucp2.ui.navigation.DestinasiUpdateMK
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ class UpdateMKViewModel (
     var updateMKUIState by mutableStateOf(MKUIState())
         private set
 
-    private val _kode: String = checkNotNull(savedStateHandle[DestinasiUpdate.KODE])
+    private val _kode: String = checkNotNull(savedStateHandle[DestinasiUpdateMK.KODE])
 
     init {
         viewModelScope.launch {
