@@ -24,7 +24,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.ucp2.view.viewmodel.Dosen.FormErrorState
 import com.example.ucp2.view.viewmodel.Matakuliah.FormErrorStateMK
+import com.example.ucp2.view.viewmodel.Matakuliah.MKUIState
 import com.example.ucp2.view.viewmodel.Matakuliah.MatakuliahEvent
+
+@Composable
+fun InsertBodyMk(
+    modifier: Modifier = Modifier,
+    onValueChange: (MatakuliahEvent) -> Unit,
+    uiState: MKUIState,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        FormMatakuliah(
+            matakuliahEvent = uiState.matakuliahEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            dosenList = uiState.dosenList,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Simpan")
+        }
+    }
+}
 
 
 @Composable
