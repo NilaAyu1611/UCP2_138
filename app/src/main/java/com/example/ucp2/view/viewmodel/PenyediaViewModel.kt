@@ -12,6 +12,7 @@ import com.example.ucp2.view.viewmodel.Dosen.HomeDsnViewModel
 import com.example.ucp2.view.viewmodel.Matakuliah.DetailMKViewModel
 import com.example.ucp2.view.viewmodel.Matakuliah.HomeMKViewModel
 import com.example.ucp2.view.viewmodel.Matakuliah.MKViewModel
+import com.example.ucp2.view.viewmodel.Matakuliah.UpdateMKViewModel
 
 object PenyediaViewModel {
 
@@ -50,6 +51,12 @@ object PenyediaViewModel {
 
         initializer {
             DetailMKViewModel(
+                createSavedStateHandle(),
+                krsApp().containerApp.repositoryMK
+            )
+        }
+        initializer {
+            UpdateMKViewModel(
                 createSavedStateHandle(),
                 krsApp().containerApp.repositoryMK
             )
