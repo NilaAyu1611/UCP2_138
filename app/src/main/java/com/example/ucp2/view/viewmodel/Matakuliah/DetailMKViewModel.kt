@@ -21,21 +21,21 @@ class DetailMKViewModel (
 ): ViewModel(){
     private val _kode: String = checkNotNull(savedStateHandle[DestinasiDetail.KODE])
 
-    val detailMKUiState: StateFlow<DetailMKUiState> = repositoryMK.getMatakuliah(_kode)
+    val detailMKUiState: StateFlow<DetailMKlUiState> = repositoryMK.getMatakuliah(_kode)
         .filterNotNull()
         .map{
-            DetailMKUiState(
-                detailUiEvent = it.toDetaiMKlUiEvent(),
+            DetailMKlUiState(
+                detailUiEvent = it.toDetailMKUiEvent(),
                 isLoading = false,
             )
         }
         .onStart {
-            emit(DetailMKUiState(isLoading = true))
+            emit(DetailMKlUiState(isLoading = true))
             delay(600)
         }
         .catch{
             emit(
-                DetailMKUiState(
+                DetailMKlUiState(
                     isLoading = false,
                     isError = true,
                     errorMessage = it.message ?: "Terjadi kesalahan",
@@ -51,7 +51,7 @@ class DetailMKViewModel (
         )
 
     fun deleteMatakuliah(){
-        detailMKUiState.value.detailUiEvent.toMahasiswaEntity().let {
+        detailMKUiState.value.detailUiEvent.toMatakuliahEntity().let {
             viewModelScope.launch {
                 repositoryMK.deleteMatakuliah(it)
             }
