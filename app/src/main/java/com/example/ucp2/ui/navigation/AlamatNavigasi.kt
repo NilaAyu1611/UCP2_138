@@ -9,3 +9,7 @@ object DestinasiHome : AlamatNavigasi{
     override val route = "home"
 }
 
+// Navigasi untuk Home Dosen
+object DestinasiHomeDosen : AlamatNavigasi {
+    override val route = "homeDosen"
+}
