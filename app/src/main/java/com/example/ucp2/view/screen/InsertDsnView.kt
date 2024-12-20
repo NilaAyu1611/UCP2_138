@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -113,5 +114,37 @@ fun InsertBodyDsn(
         ) {
             Text("Simpan")
         }
+    }
+}
+
+@Composable
+fun FormDosen(
+    dosenEvent: DosenEvent = DosenEvent(),
+    onValueChange: (DosenEvent) -> Unit = {},
+    errorState: FormErrorState = FormErrorState(),
+    modifier: Modifier = Modifier
+){
+    val jeniskelamin = listOf("Laki-laki", "Perempuan")
+
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = dosenEvent.nidn,
+            onValueChange = {
+                onValueChange(dosenEvent.copy(nidn = it))
+            },
+            label = { Text("NIDN") },
+            isError = errorState.nidn != null,
+            placeholder = { Text("Masukkan NIDN") },
+        )
+        Text(
+            text = errorState.nidn ?: "",
+            color = Color.Red
+        )
+
+
+
     }
 }
