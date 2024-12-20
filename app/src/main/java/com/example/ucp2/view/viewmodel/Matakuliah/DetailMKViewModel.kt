@@ -3,6 +3,7 @@ package com.example.ucp2.view.viewmodel.Matakuliah
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ucp2.Data.entity.Matakuliah
 import com.example.ucp2.repository.RepositoryMK
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -70,4 +71,16 @@ class DetailMKlUiState(
 
     val isUiEventNotEmpty: Boolean
         get() = detailUiEvent != MatakuliahEvent()
+}
+
+// memindahkan data class dari entity ke ui
+fun Matakuliah.toDetailMKUiEvent(): MatakuliahEvent{
+    return MatakuliahEvent(
+        kode = kode,
+        nama = nama,
+        sks = sks,
+        semester = semester,
+        jenismk = jenismk,
+        dosenpengampu = dosenpengampu
+    )
 }
