@@ -3,6 +3,7 @@ package com.example.ucp2.view.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ucp2.Data.entity.Dosen
 import com.example.ucp2.repository.RepositoryDsn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -62,3 +63,11 @@ class DetailUiState(
         get() = detailUiEvent != DosenEvent()
 }
 
+// memindahkan data class dari entity ke ui
+fun Dosen.toDetailUiEvent(): DosenEvent{
+    return DosenEvent(
+        nidn = nidn,
+        nama = nama,
+        jeniskelamin = jeniskelamin
+    )
+}
