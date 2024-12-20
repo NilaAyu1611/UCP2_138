@@ -32,3 +32,10 @@ object DestinasiDetailMK : AlamatNavigasi {
     const val KODE = "kode" // KODE adalah kunci unik untuk Matakuliah
     val routesWithArg = "$route/{$KODE}"
 }
+
+// Navigasi untuk Update Matakuliah
+object DestinasiUpdateMK : AlamatNavigasi {
+    override val route = "updateMK"
+    const val KODE = "kode"
+    val routesWithArg = "$route/{$KODE}"
+}
