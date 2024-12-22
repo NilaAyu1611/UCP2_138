@@ -21,14 +21,19 @@ class UpdateMKViewModel (
     var updateMKUIState by mutableStateOf(MKUIState())
         private set
 
-    private val _kode: String = checkNotNull(savedStateHandle[DestinasiUpdateMK.KODE])
+    private val kode: String = checkNotNull(savedStateHandle["kode"])
 
     init {
         viewModelScope.launch {
-            updateMKUIState = repositoryMK.getMatakuliah(_kode)
+            updateMKUIState = repositoryMK.getMatakuliah(kode)
                 .filterNotNull()
                 .first()
                 .toUIStateMK()
+
+            // Dapatkan daftar dosen untuk dropdown/selection
+            repositoryMK.getDosenList().collect { dosenList ->
+                updateMKUIState = updateMKUIState.copy(dosenList = dosenList)
+            }
         }
     }
 
