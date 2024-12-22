@@ -1,15 +1,23 @@
 package com.example.ucp2.view.matakuliah
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -28,6 +36,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,8 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2.Data.entity.Matakuliah
 import com.example.ucp2.ui.costumwidget.TopAppBar
-import com.example.ucp2.view.dosen.ComponentDetailDsn
-import com.example.ucp2.view.dosen.ItemDetailDsn
+
 import com.example.ucp2.view.viewmodel.Matakuliah.DetailMKViewModel
 import com.example.ucp2.view.viewmodel.Matakuliah.DetailMKlUiState
 import com.example.ucp2.view.viewmodel.Matakuliah.toMatakuliahEntity
@@ -55,9 +63,13 @@ fun DetailMKView(
             TopAppBar(
                 judul = "Detail Mata Kuliah",
                 showBackButton = true,
-                onBack = onBack
+                onBack = onBack,
+                titleColor = Color.Cyan,
+                iconColor = Color.White
             )
+
         },
+        containerColor = Color(0xFF041137),
         floatingActionButton = {
             FloatingActionButton (
                 onClick = {
@@ -71,6 +83,7 @@ fun DetailMKView(
                     contentDescription = "Edit Mata Kuliah",
                 )
             }
+
         }
     ) { innerPadding ->
         val detailMKUiState by viewModel.detailMKUiState.collectAsState()
@@ -108,6 +121,7 @@ fun BodyDetailMK(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
+                Spacer(modifier = Modifier.height(16.dp))
                 ItemDetailMK(
                     matakuliah = detailMKUiState.detailUiEvent.toMatakuliahEntity(),
                     modifier = Modifier
@@ -117,9 +131,23 @@ fun BodyDetailMK(
                     onClick = {
                         deleteConfirmationRequired = true
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth(0.2f)
+                        .height(48.dp)
+                        .align(Alignment.End),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFec8e8e),             // Warna latar belakang tombol
+                        contentColor = Color.Black                          // Warna teks tombol
+                    ),
+                    shape = MaterialTheme.shapes.medium
                 ) {
-                    Text(text = "Delete")
+                    Icon(
+                    imageVector = Icons.Filled.Delete,
+                    contentDescription = "Delete",
+                    tint = Color.Black,
+                    modifier = Modifier.size(30.dp)
+                )
+
                 }
                 if (deleteConfirmationRequired) {
                     DeleteConfirmationDialog(
@@ -153,11 +181,22 @@ fun ItemDetailMK(
     matakuliah: Matakuliah
 ) {
     Card (
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
+        modifier = modifier.fillMaxWidth()
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        Color(0xFFf1ece0), // Warna awal gradien
+                        Color(0xFF9adbff)  // Warna akhir gradien
+                    )
+
+                ),
+                shape = RoundedCornerShape(16.dp),
+            ),
+        colors = CardDefaults.cardColors(               // Pastikan transparansi teks tetap terlihat
+            containerColor = Color.Transparent
+        ),
+
+
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
