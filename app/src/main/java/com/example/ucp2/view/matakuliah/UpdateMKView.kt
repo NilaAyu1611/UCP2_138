@@ -79,8 +79,8 @@ fun UpdateMKView(
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(
-                            Color(0xFFdbf5f3), // Warna cerah biru muda
-                            Color(0xFF80D8FF)  // Warna biru yang lebih intens
+                            Color(0xFF2f6682), // Warna cerah biru muda
+                            Color(0xFF041137)  // Warna biru yang lebih intens
                         )
                     )
                 )
