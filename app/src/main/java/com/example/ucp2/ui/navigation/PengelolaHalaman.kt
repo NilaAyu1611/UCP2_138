@@ -1,4 +1,4 @@
-package com.example.ucp2.ui.navigation
+ package com.example.ucp2.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.ucp2.view.HomeView
 import com.example.ucp2.view.dosen.DestinasiInsert
-import com.example.ucp2.view.dosen.DetailDsnView
+
 import com.example.ucp2.view.dosen.HomeDsnView
 import com.example.ucp2.view.dosen.InsertDsnView
 import com.example.ucp2.view.matakuliah.DetailMKView
@@ -23,13 +23,13 @@ import com.example.ucp2.view.matakuliah.UpdateMKView
 fun PengelolaHalaman(
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
-){
+) {
     NavHost(
         navController = navController,
         startDestination = DestinasiHome.route
     )
     {
-        composable("home") {
+        composable(DestinasiHome.route) {
             HomeView(
                 navController = navController, // Pass the navController to HomeView
                 modifier = modifier
@@ -37,10 +37,10 @@ fun PengelolaHalaman(
         }
 
         // Home Dosen
-        composable("home_dosen") {
+        composable(DestinasiHomeDosen.route) {
             HomeDsnView(
-                onDetailClik = { nama ->
-                    navController.navigate("${DestinasiDetailDosen.route}/$nama")
+                onBack = {
+                    navController.popBackStack()
                 },
                 onAddDsn = {
                     navController.navigate(DestinasiInsert.route)
@@ -50,7 +50,7 @@ fun PengelolaHalaman(
         }
         composable(
             route = DestinasiInsert.route
-        ){
+        ) {
             InsertDsnView(
                 onBack = {
                     navController.popBackStack()
@@ -64,50 +64,41 @@ fun PengelolaHalaman(
         }
 
 
-        // Detail Dosen
-        composable(
-            route = DestinasiDetailDosen.routeWithArg,
-            arguments = listOf(navArgument(DestinasiDetailDosen.nama) { type = NavType.StringType })
-        ) {
-            val nama = it.arguments?.getString(DestinasiDetailDosen.nama)
-            nama?.let { namaArg ->
-                DetailDsnView(
-                    onBack = {
-                        navController.popBackStack()
-                    },
-                    modifier = modifier
-                )
-            }
-        }
-
-
 
         // Home Mata Kuliah
-        composable("home_mk") {
+        composable(DestinasiHomeMK.route) {
             HomeMKView(
                 onDetailClick = { kode ->
                     navController.navigate("${DestinasiDetailMK.route}/$kode")
+                    println(
+                        "PengelolaanHalaman: nim = $kode"
+                    )
                 },
                 onAddMk = {
-                    navController.navigate(DestinasiInsert.route)
+                    navController.navigate(DestinasiInsertMK.route)
                 },
-                modifier = modifier
+                onBack = {
+                    navController.popBackStack()
+                },
+                modifier = modifier,
             )
-            composable(
-                route = DestinasiInsert.route
-            ){
-                InsertMkView(
-                    onBack = {
-                        navController.popBackStack()
-                    },
-                    onNavigate = {
-                        navController.popBackStack()
-                    },
-                    modifier = modifier,
-                )
-
-            }
         }
+
+        composable(
+            route = DestinasiInsertMK.route
+        ) {
+            InsertMkView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier,
+            )
+
+        }
+
 
         // Detail Mata Kuliah
         composable(
@@ -146,10 +137,6 @@ fun PengelolaHalaman(
                 modifier = modifier
             )
         }
-
-
-
-
-        }
-
+    }
 }
+
