@@ -126,7 +126,7 @@ fun InsertMkView(
                     InsertBodyMk(
                         uiState = uiState,
                         onValueChange = { updatedEvent ->
-                            viewModel.onEvent(updatedEvent)
+                            viewModel.update(updatedEvent)
                         },
                         onClick = {
                             viewModel.saveData()
@@ -146,7 +146,6 @@ fun InsertBodyMk(
     modifier: Modifier = Modifier,
     onValueChange: (MatakuliahEvent) -> Unit,
     uiState: MKUIState,
-    dosenList: List<String> = emptyList(),
     onClick: () -> Unit
 ) {
     Column(
@@ -161,7 +160,7 @@ fun InsertBodyMk(
             matakuliahEvent = uiState.matakuliahEvent,
             onValueChange = onValueChange,
             errorState = uiState.isEntryValid,
-            dosenList = dosenList,
+            dosenList = uiState.dosenList,
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -189,7 +188,7 @@ fun FormMatakuliah(
     matakuliahEvent: MatakuliahEvent = MatakuliahEvent(),
     onValueChange: (MatakuliahEvent) -> Unit = {},
     errorState: FormErrorStateMK = FormErrorStateMK(),
-    dosenList: List<String> = emptyList(),
+    dosenList: List<String>,
     modifier: Modifier = Modifier
 ) {
     val jenisMkOptions = listOf("Matkul Wajib", "Matkul Peminatan")
@@ -310,6 +309,8 @@ fun FormMatakuliah(
             }
 
         }
+
+
 
 
         Text(text = "Dosen Pengampu")
