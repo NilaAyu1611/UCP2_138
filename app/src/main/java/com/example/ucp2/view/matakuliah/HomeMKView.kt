@@ -1,5 +1,6 @@
 package com.example.ucp2.view.matakuliah
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,8 +12,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
@@ -32,6 +36,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,14 +56,18 @@ fun HomeMKView(
     MKViewModel: HomeMKViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onAddMk: () -> Unit = {},
     onDetailClick: (String) -> Unit = {},
+    onBack: () -> Unit,
     modifier: Modifier = Modifier
 ){
     Scaffold (
         topBar = {
             TopAppBar(
                 judul = "Daftar Mata Kuliah",
-                showBackButton = false,
-                onBack = {}
+                showBackButton = true,
+                onBack = onBack,
+                titleColor = Color.Cyan,
+                iconColor = Color.White
+
             )
         },
         floatingActionButton = {
@@ -71,7 +81,8 @@ fun HomeMKView(
                     contentDescription = "Tambah Mata Kuliah",
                 )
             }
-        }
+        },
+        containerColor = Color(0xFF041137)
     ) { innerPadding ->
         val homeMKUiState by MKViewModel.homeMKUiState.collectAsState()
 
@@ -81,7 +92,7 @@ fun HomeMKView(
             onclick = {
                 onDetailClick(it)
             },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding).padding(top = 16.dp)
         )
     }
 }
@@ -178,84 +189,99 @@ fun CardMK(
         onClick = onClik,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = MaterialTheme.shapes.medium
     ) {
-        Column(
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = mk.kode,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
+        Box(
+            modifier = Modifier
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFFdfdfc7), // Gradient starting color
+                            Color(0xFF3cebdb)  // Gradient ending color
+                        )
+                    )
                 )
-            }
+                .fillMaxWidth()
+        ){
+            Column(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(imageVector = Icons.Filled.Info, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = mk.kode,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                }
 
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = mk.nama,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.PlayArrow, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = mk.sks,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(imageVector = Icons.Filled.Create, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = mk.nama,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                }
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(imageVector = Icons.Filled.PlayArrow, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = mk.sks,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                }
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.Home, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = mk.semester,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
-                )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = mk.jenismk,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = mk.dosenpengampu,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(imageVector = Icons.Filled.Home, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = mk.semester,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(imageVector = Icons.Filled.KeyboardArrowRight, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = mk.jenismk,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(imageVector = Icons.Filled.Person, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = mk.dosenpengampu,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                }
+        }
+
         }
     }
 }
