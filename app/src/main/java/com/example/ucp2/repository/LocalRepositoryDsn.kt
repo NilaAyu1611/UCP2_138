@@ -20,4 +20,13 @@ class LocalRepositoryDsn (
         return dosenDao.getDosen(nama)
     }
 
+//    override suspend fun getDosenList(): List<String> {
+//        return dosenDao.getAllDosenNames()                  // Mengembalikan daftar nama dosen sebagai List<String>
+//    }
+//
+//    override suspend fun getDosenList(): List<String> {
+//        return dosenDao.getAllDosenNames()
+//    }
+
+
 }
