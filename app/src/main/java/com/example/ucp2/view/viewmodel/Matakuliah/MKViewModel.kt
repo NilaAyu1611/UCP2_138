@@ -19,9 +19,11 @@ class MKViewModel (private val repositoryMK: RepositoryMK) : ViewModel(){
         //mengambil daftar dosen saat VM diinisialisasi
         viewModelScope.launch {
             repositoryMK.getDosenList().collect { dosenNames ->
+                // Mengupdate UI state dengan daftar dosen
                 uiState = uiState.copy(dosenList = dosenNames)
             }
         }
+
     }
 
     fun update(matakuliahEvent: MatakuliahEvent){
