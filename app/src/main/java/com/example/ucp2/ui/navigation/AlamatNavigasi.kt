@@ -1,5 +1,7 @@
 package com.example.ucp2.ui.navigation
 
+import com.example.ucp2.ui.navigation.DestinasiUpdateMK.KODE
+
 interface AlamatNavigasi{
     val route: String
 }
@@ -14,12 +16,7 @@ object DestinasiHomeDosen : AlamatNavigasi {
     override val route = "homeDosen"
 }
 
-//Navigasi untuk detail dosen
-object DestinasiDetailDosen : AlamatNavigasi{
-    override val route = "detailDosen"
-    const val nama = "nama"
-    val routeWithArg = "$route/{$nama}"
-}
+
 
 // Navigasi untuk Home Mata Kuliah
 object DestinasiHomeMK : AlamatNavigasi {
@@ -39,3 +36,12 @@ object DestinasiUpdateMK : AlamatNavigasi {
     const val KODE = "kode"
     val routesWithArg = "$route/{$KODE}"
 }
+
+object DestinasiInsertMK: AlamatNavigasi {
+    override val route: String = "insertMK"
+    const val KODE = "kode"
+    val routesWithArg = "${route}/{$KODE}"
+
+}
+
+
