@@ -74,7 +74,7 @@ fun HomeView(
         Spacer(modifier = Modifier.height(32.dp))
 
         Text(
-            text = "Welcome to Home ^_^ ",
+            text = "Welcome to 🏠",
             style = TextStyle(
                 color = Color(0xFF83def5), // Warna teks (contoh oranye)
                 fontSize = 39.sp, // Ukuran font
