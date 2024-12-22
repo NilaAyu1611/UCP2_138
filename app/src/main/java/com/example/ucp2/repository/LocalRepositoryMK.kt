@@ -30,7 +30,6 @@ class LocalRepositoryMK(
     override suspend fun updateMatakuliah(matakuliah: Matakuliah) {     // memperbarui data mk di DB
         mataKuliahDao.updateMatakuliah(matakuliah)
     }
-
     override suspend fun getDosenList(): Flow<List<String>> {
         return flow {
             emit(dosenDao.getAllDosenNames())
