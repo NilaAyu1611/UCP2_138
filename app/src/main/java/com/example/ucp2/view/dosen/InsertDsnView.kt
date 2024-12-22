@@ -1,13 +1,23 @@
 package com.example.ucp2.view.dosen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -22,8 +32,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2.ui.costumwidget.TopAppBar
 import com.example.ucp2.ui.navigation.AlamatNavigasi
@@ -63,7 +77,17 @@ fun InsertDsnView(
 
     Scaffold(
         modifier = modifier,
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState)}
+        topBar = {
+            TopAppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Tambah Dosen",
+                titleColor = Color.Cyan,
+                iconColor = Color.White
+            )
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState)},
+        containerColor = Color(0xFF041137)
     ) {padding ->
         Column(
             modifier = Modifier
@@ -71,23 +95,31 @@ fun InsertDsnView(
                 .padding(padding)
                 .padding(16.dp)
         ) {
-            TopAppBar(
-                onBack = onBack,
-                showBackButton = true,
-                judul = "Tambah Dosen"
-            )
+            Card (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                shape = MaterialTheme.shapes.medium,
 
-            // Isi Body
-            InsertBodyDsn(
-                uiState = uiState,
-                onValueChange = {updatedEvent ->
-                    viewModel.updateState(updatedEvent) // update state di viewmodel
-                },
-                onClick = {
-                    viewModel.saveData()        //simpan data
-                    onNavigate()
+            ) {
+                Box(
+                    modifier = Modifier
+                        .background(Color(0xFFdbf5f3)) // Dark blue background for the form
+                        .padding(16.dp)
+                ) {
+                    // Isi Body
+                    InsertBodyDsn(
+                        uiState = uiState,
+                        onValueChange = { updatedEvent ->
+                            viewModel.updateState(updatedEvent) // update state di viewmodel
+                        },
+                        onClick = {
+                            viewModel.saveData()        //simpan data
+                            onNavigate()
+                        }
+                    )
                 }
-            )
+            }
         }
     }
 
@@ -115,9 +147,19 @@ fun InsertBodyDsn(
         )
         Button(
             onClick = onClick,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .height(56.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2dc3cd),             // Warna latar belakang tombol
+                contentColor = Color.Black                          // Warna teks tombol
+            )
         ) {
-            Text("Simpan")
+            Text("Simpan",
+                fontSize = 23.sp,
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily.Monospace
+            )
         }
     }
 }
@@ -141,8 +183,15 @@ fun FormDosen(
                 onValueChange(dosenEvent.copy(nidn = it))
             },
             label = { Text("NIDN") },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Info,
+                    contentDescription = ""
+                )
+            },
             isError = errorState.nidn != null,
             placeholder = { Text("Masukkan NIDN") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         Text(
             text = errorState.nidn ?: "",
@@ -156,6 +205,12 @@ fun FormDosen(
                 onValueChange(dosenEvent.copy(nama = it))
             },
             label = { Text("Nama") },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = ""
+                )
+            },
             isError = errorState.nama != null,
             placeholder = { Text("Masukkan Nama") },
         )
