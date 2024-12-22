@@ -1,18 +1,22 @@
 package com.example.ucp2.view.dosen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -32,6 +36,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,6 +54,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeDsnView(
     viewModel: HomeDsnViewModel = viewModel(factory = PenyediaViewModel.Factory),
+    onBack: () -> Unit,
     onAddDsn: () -> Unit = {},
     onDetailClik: (String) -> Unit = {},
     modifier: Modifier = Modifier
@@ -55,8 +63,10 @@ fun HomeDsnView(
         topBar = {
             TopAppBar(
                 judul = "Daftar Dosen",
-                showBackButton = false,
-                onBack = {}
+                showBackButton = true,
+                onBack = onBack,
+                titleColor = Color.Cyan,
+                iconColor = Color.White
             )
         },
         floatingActionButton = {
@@ -70,7 +80,8 @@ fun HomeDsnView(
                     contentDescription = "Tambah Dosen",
                 )
             }
-        }
+        },
+        containerColor = Color(0xFF041137) // Warna latar belakang Scaffold
 
     ){innerPadding ->
         val homeUiState by viewModel.homeUIState.collectAsState()
@@ -80,7 +91,7 @@ fun HomeDsnView(
             onclick = {
                 onDetailClik
             },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding).padding(top = 16.dp)
         )
     }
 }
@@ -152,7 +163,7 @@ fun ListDosen(
     onClik: (String) -> Unit = { }
 ){
     LazyColumn(
-        modifier = modifier
+        modifier = modifier.padding(top = 16.dp)
     ) {
         items(
             items = listDsn,
@@ -176,37 +187,70 @@ fun CardDsn(
     Card(
         onClick = onClik,
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(imageVector = Icons.Filled.Person, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = Dsn.nama,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
-            Row (modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = Dsn.nidn,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
-                )
-            }
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = MaterialTheme.shapes.medium
 
+    ) {
+        Box(
+            modifier = Modifier
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFFdfdfc7), // Warna awal gradien
+                            Color(0xFF3cebdb),  // Warna akhir gradien
+
+
+                        )
+                    )
+                )
+                .fillMaxWidth()
+        ){
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(imageVector = Icons.Filled.Person, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = Dsn.nama,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row (modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    Icon(imageVector = Icons.Filled.Info, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = Dsn.nidn,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row (modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    Icon(imageVector = Icons.Filled.Face, contentDescription = "")
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        text = Dsn.jeniskelamin,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                }
+
+
+            }
         }
+
+
 
     }
 }
