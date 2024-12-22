@@ -26,4 +26,29 @@ interface MataKuliahDao {
 
     @Update
     suspend fun updateMatakuliah(matakuliah: Matakuliah)
+
+    @Query("SELECT nama FROM dosen")
+    suspend fun getAllDosenNames(): List<String>
+//
+//    @Query(
+//        """SELECT
+//            mk.kode,
+//            mk.nama AS namaMK,
+//            mk.sks AS SKS,
+//            mk.semester,
+//            mk.jenismk AS jenisMK,
+//            d.nama AS namaDosen
+//        FROM
+//            matakuliah mk
+//        INNER JOIN
+//            dosen d
+//        ON
+//            mk.dosenpengampu = d.nidn
+//        WHERE
+//            mk.kode = :kode
+//        ORDER BY
+//            mk.nama ASC
+//        """
+//    )
+//    fun getMatakuliahJoin(kode: String): Flow<List<MatakuliahJoinResult>>
 }
